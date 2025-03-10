@@ -1,0 +1,15 @@
+services:
+  mysql-service:
+    image: mysql:8.0
+    container_name: mysql-container
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_USER: ruser
+      MYSQL_PASSWORD: localpw
+      MYSQL_DATABASE: testdb
+    ports:
+      - "3306:3306"
+    command: --server-id=1
+    volumes:
+      - ./data:/var/lib/mysql
+      - ./back-up:/back-up

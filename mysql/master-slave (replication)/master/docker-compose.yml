@@ -1,0 +1,19 @@
+services:
+  mysql-master:
+    image: mysql:8.0
+    container_name: mysql-master
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_USER: ruser
+      MYSQL_PASSWORD: localpw
+      MYSQL_DATABASE: testdb
+      MYSQL_REPLICATION_MODE: master
+    ports:
+      - "3306:3306"
+    command: --server-id=1
+    volumes:
+      - ./data:/var/lib/mysql
+      - ./back-up:/back-up        # 파일 복사가 필요하여 생성
+networks:
+  mysql-network:
+    driver: bridge

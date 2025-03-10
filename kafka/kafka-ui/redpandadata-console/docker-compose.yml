@@ -1,0 +1,13 @@
+
+# kafka 연동 필요
+
+services:
+  redpanda-console-service:
+    image: redpandadata/console:v2.8.2
+    container_name: redpanda-console-container
+    ports:
+      - "8080:8080"
+    environment:
+      - KAFKA_BROKERS=kafka-service:9192
+    depends_on:
+      - #[kafka-server]

@@ -1,0 +1,12 @@
+
+# kafka 연동 필요
+
+services:
+  kafka-ui-service:
+    image: provectuslabs/kafka-ui:v0.7.2
+    container_name: kafka-ui-container
+    ports:
+      - "8080:8080"
+    restart: always
+    depends_on:
+      - #[kafka-server]

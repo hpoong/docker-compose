@@ -1,0 +1,16 @@
+services:
+  locust-service:
+    image: locustio/locust:2.32.0
+    command: >
+#      -f /mnt/locust/locustfile-v1.py --host=http://host.docker.internal:8080
+      -f /mnt/locust/locustfile-v1.py --host=http://host.docker.internal:#[TEST Server Port]
+    ports:
+      - "8089:8089"
+    volumes:
+      - ./:/mnt/locust # 파일 위치 마운트 (locustfile-v1.py)
+    networks:
+      - locust-network
+
+networks:
+  locust-network:
+    driver: bridge

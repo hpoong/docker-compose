@@ -1,0 +1,27 @@
+services:
+
+  kafka-3:
+    image: bitnami/kafka:3.6.2
+    container_name: kafka-3-container
+    restart: always
+    ports:
+      - "9092:9092"
+    environment:
+      - KAFKA_CFG_NODE_ID=3
+      - KAFKA_CFG_PROCESS_ROLES=broker  # 브로커 역할만 수행
+#      - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=1@192.168.0.1:9093
+      - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=1@#[server1-ip]
+      - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092
+#      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://192.168.0.3:9092
+      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://#[server3-ip]
+      - KAFKA_CFG_LOG_DIRS=/bitnami/kafka/data
+      - KAFKA_KRAFT_CLUSTER_ID=Df0Qo5VkTnaJ4T6QJmOHuA  # ✅ kafka-1과 동일한 CLUSTER ID 사용
+      - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=""
+    volumes:
+      - ./data:/bitnami/kafka/data
+    networks:
+      - kafka-network
+
+networks:
+  kafka-network:
+    driver: bridge

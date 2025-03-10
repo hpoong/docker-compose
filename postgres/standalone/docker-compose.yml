@@ -1,0 +1,18 @@
+services:
+  postgres-service:
+    image: postgres:15
+    container_name: postgres-container
+    environment:
+      POSTGRES_USER: ruser
+      POSTGRES_PASSWORD: localpw
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./data:/var/lib/postgresql/data
+      - ./conf:/etc/postgresql/conf.d
+    networks:
+      - postgres-network
+
+networks:
+  postgres-network:
+    driver: bridge
