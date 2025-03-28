@@ -1,0 +1,16 @@
+
+services:
+  elasticsearch:
+    image: 'registry.gitlab.com/mason14/docker-image-store:elasticsearch-nori-plugin'
+    container_name: elasticsearch
+    environment:
+      - discovery.type=single-node
+      - TZ=Asia/Seoul
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    volumes:
+      - ./data:/usr/share/elasticsearch/data
+      - ./dictionary:/usr/share/elasticsearch/config/dictionary
+
+
