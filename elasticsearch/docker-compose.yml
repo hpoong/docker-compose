@@ -12,5 +12,4 @@ services:
     volumes:
       - ./data:/usr/share/elasticsearch/data
       - ./dictionary:/usr/share/elasticsearch/config/dictionary
-
-
+      - ./ayc5oo.json:/usr/share/elasticsearch/bulk-data.json
