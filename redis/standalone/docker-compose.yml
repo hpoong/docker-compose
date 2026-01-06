@@ -1,14 +1,26 @@
 services:
   redis-service:
     image: redis:7.2
-    container_name: redis-container
+    container_name: redis-service
+    restart: unless-stopped
+    # prots 추후 제거  (운영)
     ports:
       - "6379:6379"
+
     volumes:
-      - ./data:/data
-    command: ["redis-server", "--appendonly", "yes"]
+      - redis-data:/data
+      - ./redis.conf:/usr/local/etc/redis/redis.conf
+
+    command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
+
+    # 실제로 적용되는 메모리 제한
+    mem_limit: 512m
+
     networks:
       - redis-network
+
+volumes:
+  redis-data:
 
 networks:
   redis-network:
