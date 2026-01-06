@@ -1,0 +1,7 @@
+
+# ayc5oo.json 파일 import 시 컨테이너 내부 아래 실행
+
+curl -X POST "localhost:9200/_bulk" \
+     -H "Content-Type: application/json" \
+     --data-binary "@/usr/share/elasticsearch/bulk-data.json"
+
